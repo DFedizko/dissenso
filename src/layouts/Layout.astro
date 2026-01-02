@@ -2,6 +2,7 @@
 import BaseHead from "@/components/blocks/BaseHead.astro";
 import Header from "@/components/blocks/Header.astro";
 import "@/styles/global.css";
+import { Font } from "astro:assets";
 
 export type Props = {
 	title?: string;
@@ -10,9 +11,11 @@ export type Props = {
 const { title } = Astro.props;
 ---
 
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 	<head>
 		<BaseHead title={title} />
+		<Font cssVariable="--font-ibm-plex-serif" preload />
+		<Font cssVariable="--font-ibm-plex-sans" preload />
 	</head>
 
 	<Header />

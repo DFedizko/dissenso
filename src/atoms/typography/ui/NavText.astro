@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+export type Props = HTMLAttributes<"a">;
+
+const { ...props } = Astro.props;
+---
+
+<a {...props} class="font-medium text-sm leading-5 tracking-[0.025rem] font-ibm-plex-sans">
+	<slot />
+</a>

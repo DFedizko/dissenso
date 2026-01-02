@@ -1,0 +1,11 @@
+---
+export type Props = {
+	italic?: boolean;
+}
+
+const { italic } = Astro.props;
+---
+
+<h2 class=`text-[1.375rem] leading-8 font-ibm-plex-serif ${italic && "italic"}`>
+	<slot />
+</h2>

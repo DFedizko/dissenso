@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+export type Props = HTMLAttributes<"label">;
+
+const { ...props } = Astro.props;
+---
+
+<label {...props} class="font-medium text-[0.813rem] leading-4.5 tracking-[0.025rem] font-ibm-plex-sans">
+	<slot />
+</label>
