@@ -1,3 +1,11 @@
-<span class="font-medium leading-[inherit] font-ibm-plex-serif">
+---
+export type Props = {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class=`font-medium leading-[inherit] font-ibm-plex-serif ${className}`>
 	<slot />
 </span>

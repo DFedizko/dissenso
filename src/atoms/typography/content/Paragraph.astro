@@ -1,3 +1,11 @@
-<p class="leading-7 font-ibm-plex-serif">
+---
+export type Props = {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<p class=`leading-7 font-ibm-plex-serif ${className}`>
 	<slot />
 </p>

@@ -1,3 +1,11 @@
-<h2 class="font-semibold text-[1.75rem] leading-9 tracking-[-0.019rem] font-ibm-plex-serif">
+---
+export type Props = {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<h2 class=`font-semibold text-[1.75rem] leading-9 tracking-[-0.019rem] font-ibm-plex-serif ${className}`>
 	<slot />
 </h2>

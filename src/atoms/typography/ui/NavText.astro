@@ -1,11 +1,16 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-export type Props = HTMLAttributes<"a">;
+export type Props = HTMLAttributes<"a"> & {
+	class?: string;
+};
 
-const { ...props } = Astro.props;
+const { class: className, ...props } = Astro.props;
 ---
 
-<a {...props} class="font-medium text-sm leading-5 tracking-[0.025rem] font-ibm-plex-sans">
+<a 
+	{...props}
+	class=`font-medium text-sm leading-5 tracking-[0.025rem] font-ibm-plex-sans ${className}`
+>
 	<slot />
 </a>

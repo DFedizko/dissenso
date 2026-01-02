@@ -1,3 +1,11 @@
-<h4 class="font-medium text-lg leading-6.5 font-ibm-plex-serif">
+---
+export type Props = {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<h4 class=`font-medium text-lg leading-6.5 font-ibm-plex-serif ${className}`>
 	<slot />
 </h4>

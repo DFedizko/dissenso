@@ -1,3 +1,11 @@
-<blockquote class="text-lg leading-6.5 italic font-ibm-plex-serif">
+---
+export type Props = {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<blockquote class=`text-lg leading-6.5 italic font-ibm-plex-serif ${className}`>
 	<slot />
 </blockquote>

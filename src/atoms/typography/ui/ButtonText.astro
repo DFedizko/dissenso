@@ -1,3 +1,11 @@
-<span class="font-semibold text-sm leading-5 tracking-[0.031rem] font-ibm-plex-sans">
+---
+export type Props = {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class=`font-semibold text-sm leading-5 tracking-[0.031rem] font-ibm-plex-sans ${className}`>
 	<slot />
 </span>
