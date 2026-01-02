@@ -19,7 +19,8 @@
 		"rules": {
 			"recommended": true,
 			"correctness": {
-				"noUnusedImports": "off"
+				"noUnusedImports": "off",
+				"noUnusedVariables": "off"
 			}
 		}
 	},
