@@ -1,0 +1,28 @@
+---
+import type { ComponentProps } from "astro/types";
+
+// biome-ignore lint/style/useImportType: deprecated rule in astro
+import NavText from "../atoms/typography/ui/NavText.astro";
+
+export type NavLink = {
+	link: ComponentProps<typeof NavText>,
+	text: string
+}
+
+export type Props = {
+	links: NavLink[];
+	class?: string;
+}
+
+const { links, class: className } = Astro.props;
+---
+
+<nav class={className}>
+	<ul class="flex gap-6 w-full justify-between flex-row-reverse">
+		{links.map(({ text, link }) => (
+			<li>
+				<NavText {...link}>{text}</NavText>
+			</li>
+		))}
+	</ul>
+</nav>
