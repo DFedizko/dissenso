@@ -1,0 +1,13 @@
+---
+import Image from 'astro/components/Image.astro';
+import type { LocalImageProps, RemoteImageProps } from 'astro:assets';
+
+export type Props = LocalImageProps | RemoteImageProps;
+
+const { ...props } = Astro.props;
+---
+
+<Image
+	class="w-full h-55 xl:h-75 object-cover"
+	{...props}
+/>
