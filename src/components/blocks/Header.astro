@@ -1,3 +1,10 @@
-<header class="flex p-6 justify-center bg-neutral-800">
-    <p class="text-xl text-white">Header</p>
+---
+import MinorTitle from "@/components/atoms/typography/content/MinorTitle.astro";
+import LayoutContainer from "../templates/contianers/LayoutContainer.astro";
+---
+
+<header class="flex justify-center bg-neutral-800 py-4">
+    <LayoutContainer class="border border-red-300">
+        <MinorTitle>Dissenso</MinorTitle>
+    </LayoutContainer>
 </header>
