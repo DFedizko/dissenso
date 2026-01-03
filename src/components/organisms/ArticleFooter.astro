@@ -1,0 +1,18 @@
+---
+import type { ArticleDTO } from '@/types/ArticleDTO'
+import ContentContainer from '../atoms/contianers/ContentContainer.astro';
+
+export type Props = Pick<ArticleDTO, "tags">;
+
+const { tags } = Astro.props;
+---
+
+<footer>
+	<ContentContainer>
+		<ul>
+			{tags.map((tag) => (
+				<li>{tag}</li>
+			))}
+		</ul>
+	</ContentContainer>
+</footer>
