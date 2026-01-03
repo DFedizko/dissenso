@@ -1,0 +1,30 @@
+---
+import Heading from "@/components/atoms/typography/content/Heading.astro";
+import ArticleMeta from "@/components/molecules/ArticleMeta.astro";
+import CoverImage from "@/components/atoms/CoverImage.astro";
+import type { ArticleMetaDTO } from "@/types/ArticleMetaDTO";
+
+export type Props = {
+	title: string;
+	coverImage?: string;
+	meta: ArticleMetaDTO;
+	class?: string;
+}
+
+const { title, coverImage, meta, class: className } = Astro.props;
+---
+
+<header class=`w-full flex flex-col gap-6 ${className}`>
+	<Heading>{title}</Heading>
+	{coverImage &&
+		<CoverImage
+			inferSize
+			src={coverImage}
+			alt=""
+			role="presentation"
+			format="avif"
+			priority
+		/>
+	}
+	<ArticleMeta {...meta} />
+</header>
