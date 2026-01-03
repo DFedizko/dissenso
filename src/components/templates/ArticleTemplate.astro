@@ -1,0 +1,31 @@
+---
+import ArticleHeader from "@/components/organisms/ArticleHeader.astro";
+import ArticleBody from "@/components/organisms/ArticleBody.astro";
+import ArticleFooter from "@/components/organisms/ArticleFooter.astro";
+import type { ArticleDTO } from "@/types/ArticleDTO";
+import Paragraph from "@/components/atoms/typography/content/Paragraph.astro";
+import LayoutContainer from "@/components/atoms/contianers/LayoutContainer.astro";
+import { Separator } from "@/components/ui/separator";
+
+export type Props = ArticleDTO;
+
+const { title, coverImage, articleMeta, content, tags } = Astro.props;
+---
+
+<article class="flex flex-col items-center w-full">
+	<LayoutContainer class="my-6 gap-6">
+		<ArticleHeader
+			title={title}
+			coverImage={coverImage}
+			meta={articleMeta}
+		/>
+
+		<Separator />
+	</LayoutContainer>
+
+	<ArticleBody>
+		<Paragraph>{content}</Paragraph>
+	</ArticleBody>
+
+	<ArticleFooter tags={tags} />
+</article>
