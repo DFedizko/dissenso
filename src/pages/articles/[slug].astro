@@ -1,0 +1,25 @@
+---
+import ArticleTemplate from "@/components/templates/ArticleTemplate.astro";
+import Layout from "@/layouts/Layout.astro";
+import type { ArticleDTO } from "@/types/ArticleDTO";
+
+export const prerender = false;
+
+const article: ArticleDTO = {
+	title: "Meu primeiro artigo",
+	coverImage: "https://picsum.photos/3000/3000",
+	articleMeta: {
+		author: "Pedro",
+		date: "03/01/2026",
+		readingTime: "5 minutos",
+	},
+	content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veritatis delectus incidunt quaerat accusamus molestias ratione, cupiditate error. Tenetur, commodi hic amet voluptatibus incidunt doloribus est deleniti quae fugit deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsam atque assumenda consequatur velit temporibus ratione amet reprehenderit ut, rem perferendis officia excepturi culpa, tenetur nemo esse! Dolore, fugit a!\nLorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veritatis delectus incidunt quaerat accusamus molestias ratione, cupiditate error. Tenetur, commodi hic amet voluptatibus incidunt doloribus est deleniti quae fugit deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsam atque assumenda consequatur velit temporibus ratione amet reprehenderit ut, rem perferendis officia excepturi culpa, tenetur nemo esse! Dolore, fugit a!",
+	tags: [],
+}
+---
+
+<Layout title={article.title}>
+	<ArticleTemplate
+		{...article}
+	/>
+</Layout>
