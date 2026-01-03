@@ -1,0 +1,15 @@
+---
+import type { ArticleMetaDTO } from "@/types/ArticleMetaDTO";
+import InlineText from "../atoms/typography/content/InlineText.astro";
+import Quote from "../atoms/typography/content/Quote.astro";
+
+export type Props = ArticleMetaDTO;
+
+const { author, date, readingTime } = Astro.props;
+---
+
+<div class="flex flex-col sm:self-start sm:flex-row sm:gap-6 items-center">
+	<InlineText>{author}</InlineText>
+	<Quote>{date}</Quote>
+	<Quote>Tempo de leitura: {readingTime}</Quote>
+</div>
