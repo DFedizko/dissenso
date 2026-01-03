@@ -3,11 +3,15 @@
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
+import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [react()],
 	output: "static",
+	adapter: node({
+		mode: "standalone"
+	}),
 
 	vite: {
 		plugins: [tailwindcss()],
