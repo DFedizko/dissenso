@@ -7,20 +7,26 @@ import type { NavLink } from "../molecules/NavLinkList.astro";
 const links: NavLink[] = [
     {
         link: {
+            href: "/"
+        },
+        text: "Dissenso"
+    },
+    {
+        link: {
+            href: "/publish-article"
+        },
+        text: "Publicar artigo"
+    },
+    {
+        link: {
             href: "/articles/test"
         },
         text: "Artigos"
     },
-    {
-        link: {
-            href: "/"
-        },
-        text: "Dissenso"
-    }
 ]; 
 ---
 
-<header class="flex justify-center bg-neutral-800 py-6">
+<header class="flex justify-center py-6">
     <LayoutContainer class="flex-row justify-between">
         <NavLinkList
             class="w-full"

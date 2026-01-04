@@ -18,7 +18,7 @@ const { links, class: className } = Astro.props;
 ---
 
 <nav class={className}>
-	<ul class="flex gap-6 w-full justify-between flex-row-reverse">
+	<ul class="flex gap-6 w-full justify-between">
 		{links.map(({ text, link }) => (
 			<li>
 				<NavText {...link}>{text}</NavText>

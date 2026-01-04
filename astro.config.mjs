@@ -10,7 +10,7 @@ export default defineConfig({
 	integrations: [react()],
 	output: "static",
 	adapter: node({
-		mode: "standalone"
+		mode: "standalone",
 	}),
 
 	vite: {
@@ -24,15 +24,15 @@ export default defineConfig({
 				name: "IBM Plex Serif",
 				cssVariable: "--font-ibm-plex-serif",
 				weights: [400, 500, 600],
-				styles: ["normal", "italic"]
+				styles: ["normal", "italic"],
 			},
 			{
 				provider: fontProviders.google(),
 				name: "IBM Plex Sans",
 				cssVariable: "--font-ibm-plex-sans",
 				weights: [400, 500, 600],
-				styles: ["normal"]
-			}
-		]
-	}
+				styles: ["normal"],
+			},
+		],
+	},
 });
