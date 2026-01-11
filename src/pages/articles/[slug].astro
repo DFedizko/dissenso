@@ -5,9 +5,20 @@ import type { ArticleDTO } from "@/types/ArticleDTO";
 
 export const prerender = false;
 
+const { slug } = Astro.params;
+
+Astro.response.headers.set(
+	"Cache-Control",
+	"public, max-age=604800"
+);
+Astro.response.headers.set(
+	"CDN-Cache-Control",
+	"public, max-age=604800"
+);
+
 const article: ArticleDTO = {
-	title: "Meu primeiro artigo",
-	coverImage: "https://picsum.photos/1200/1200",
+	title: "Como aplicar o data-driven na sua vida",
+	coverImage: "https://picsum.photos/seed/meu-artigo/1200/1200",
 	articleMeta: {
 		author: "Pedro",
 		date: "03/01/2026",
