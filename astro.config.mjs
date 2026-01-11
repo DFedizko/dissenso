@@ -12,9 +12,11 @@ export default defineConfig({
 	adapter: node({
 		mode: "standalone",
 	}),
-
 	vite: {
 		plugins: [tailwindcss()],
+		ssr: {
+			noExternal: ["@uiw/react-md-editor"],
+		}
 	},
 
 	experimental: {
