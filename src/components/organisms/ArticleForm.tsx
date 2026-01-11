@@ -20,61 +20,34 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
-import { MarkdownEditor } from "@remirror/react-editors/markdown";
-import { OnChangeJSON } from "@remirror/react";
-import { useCallback, useState } from "react";
-import type { RemirrorJSON } from "remirror";
-
-const STORAGE_KEY = "remirror-editor-content";
+import { useEffect, useState } from "react";
+import MDEditor from "@uiw/react-md-editor";
 
 const ArticleForm = () => {
-	const [articleContent, setArticleContent] = useState<
-		RemirrorJSON | undefined
-	>(() => {
-		const content = window.localStorage.getItem(STORAGE_KEY);
-		return content ? JSON.parse(content) : undefined;
-	});
+	const [value, setValue] = useState<string>(
+		() => localStorage.getItem("article-content") ?? "",
+	);
+
+	useEffect(() => {
+		localStorage.setItem("article-content", value);
+	}, [value]);
 
 	const form = useForm({
 		resolver: zodResolver(createArticleSchema),
-		defaultValues: {
-			title: "",
-			content: "",
-			coverImage: "",
-		},
+		defaultValues: JSON.parse(localStorage.getItem("form-data") || "{}"),
 	});
 
-	const handleEditorChange = useCallback(
-		(json: RemirrorJSON) => {
-			window.localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
-			setArticleContent(json);
-			form.setValue("content", JSON.stringify(json), {
-				shouldDirty: true,
-				shouldValidate: true,
-			});
-		},
-		[form.setValue],
-	);
+	const watchedValues = form.watch();
+
+	useEffect(() => {
+		localStorage.setItem("form-data", JSON.stringify(watchedValues));
+	}, [watchedValues]);
 
 	const onSubmit = async (formData: z.infer<typeof createArticleSchema>) => {
-		const hasContent =
-			articleContent?.content?.[1]?.content
-				?.map((c) => c.text)
-				.filter((c) => c !== undefined).length ||
-			articleContent?.content?.[0].content?.[0].text;
-
-		if (!hasContent) {
-			form.setError("content", {
-				type: "required",
-				message: "O artigo precisa de pelo menos um caracter.",
-			});
-			return;
-		}
-
 		const { error } = await actions.article.createArticle({
 			title: formData.title,
 			coverImage: formData.coverImage,
-			content: JSON.stringify(articleContent?.content),
+			content: formData.content,
 		});
 
 		if (error) {
@@ -83,11 +56,14 @@ const ArticleForm = () => {
 			return;
 		}
 
+		localStorage.setItem("article-content", "");
+		localStorage.setItem("form-data", JSON.stringify({}));
+
 		toast.success("Artigo criado com sucesso.");
 	};
 
 	return (
-		<Card className="w-full">
+		<Card className="w-full mb-6">
 			<CardHeader>
 				<CardTitle>Publicar artigo</CardTitle>
 				<CardDescription>Publique seu artigo.</CardDescription>
@@ -147,16 +123,22 @@ const ArticleForm = () => {
 						<Controller
 							name="content"
 							control={form.control}
-							render={({ fieldState }) => (
-								<Field>
-									<MarkdownEditor
-										placeholder="Descreva seu artigo..."
-										initialContent={articleContent}
-									>
-										<OnChangeJSON
-											onChange={handleEditorChange}
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<div className="md-editor">
+										<MDEditor
+											{...field}
+											value={value}
+											onChange={(value) => {
+												field.onChange(value ?? "");
+												setValue(value ?? "");
+											}}
+											preview="edit"
 										/>
-									</MarkdownEditor>
+									</div>
+									<div className="md-preview">
+										<MDEditor.Markdown source={value} />
+									</div>
 									{fieldState.invalid && (
 										<FieldError
 											errors={[fieldState.error]}

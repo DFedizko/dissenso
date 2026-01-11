@@ -1,0 +1,62 @@
+.md-preview,
+.md-preview *,
+.md-editor,
+.md-editor * {
+	background: none !important;
+	color: inherit !important;
+	border: none !important;
+	box-shadow: none !important;
+	box-sizing: border-box;
+}
+
+.md-editor .w-md-editor {
+	width: 100% !important;
+	border: 1px solid var(--border) !important;
+	border-radius: var(--radius) !important;
+}
+
+.dark .md-editor .w-md-editor {
+	background-color: var(--color-secondary) !important;
+}
+
+.md-editor .w-md-editor:focus-within {
+	border-color: var(--ring) !important;
+}
+
+.md-editor textarea {
+	display: block !important;
+	width: 100% !important;
+	font-family: inherit !important;
+	font-size: 0.875rem !important;
+	line-height: 1.5 !important;
+	color: var(--foreground) !important;
+	background: transparent !important;
+}
+
+.md-editor textarea::placeholder {
+	color: var(--muted-foreground) !important;
+}
+
+.md-preview .wmde-markdown {
+	background-color: var(--popover);
+	color: var(--foreground);
+}
+
+.md-preview .wmde-markdown h1,
+.md-preview .wmde-markdown h2,
+.md-preview .wmde-markdown h3 {
+	font-weight: 600;
+	letter-spacing: -0.025em;
+}
+
+.md-preview .wmde-markdown p {
+	line-height: 1.75;
+}
+
+.md-preview code {
+	line-height: 1.75;
+	background-color: var(--color-secondary) !important;
+	box-sizing: border-box;
+	border: 1px solid var(--border) !important;
+}
+
