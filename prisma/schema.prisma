@@ -1,0 +1,16 @@
+generator client {
+    provider = "prisma-client"
+    output   = "../prisma/generated"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model article {
+    id         String   @id @default(uuid())
+    title      String
+    coverImage String?
+    content    String
+    tags       String[]
+}
