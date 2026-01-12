@@ -7,10 +7,12 @@ datasource db {
     provider = "postgresql"
 }
 
-model article {
+model Article {
     id         String   @id @default(uuid())
     title      String
     coverImage String?
     content    String
     tags       String[]
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
 }
