@@ -1,9 +1,12 @@
 import type { ArticleMetaDTO } from "./ArticleMetaDTO";
 
 export interface ArticleDTO {
+	id: string;
 	title: string;
-	coverImage: string;
+	coverImage: string | null;
 	articleMeta: ArticleMetaDTO;
-	content: any;
+	content: string;
 	tags: string[];
+	createdAt: Date;
+	updatedAt: Date;
 }
