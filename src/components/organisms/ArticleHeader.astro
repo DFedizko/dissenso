@@ -2,14 +2,14 @@
 import Heading from "@/components/atoms/typography/content/Heading.astro";
 import ArticleMeta from "@/components/molecules/ArticleMeta.astro";
 import CoverImage from "@/components/atoms/CoverImage.astro";
-import type { ArticleMetaDTO } from "@/types/ArticleMetaDTO";
+import type { ArticleMetaDTO } from "@/dtos/ArticleMetaDTO";
 
 export type Props = {
 	title: string;
-	coverImage?: string;
+	coverImage: string;
 	meta: ArticleMetaDTO;
 	class?: string;
-}
+};
 
 const { title, coverImage, meta, class: className } = Astro.props;
 ---
