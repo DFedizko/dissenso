@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createArticleSchema } from "@/actions/article-schema";
+import { createArticleSchema } from "@/schemas/article/createArticleSchema";
 import type { z } from "astro/zod";
 import { actions } from "astro:actions";
 import {
@@ -27,10 +27,12 @@ const ArticleForm = () => {
 	const [value, setValue] = useState<string>(
 		() => localStorage.getItem("article-content") ?? "",
 	);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	useEffect(() => {
+		if (isSubmitting) return;
 		localStorage.setItem("article-content", value);
-	}, [value]);
+	}, [value, isSubmitting]);
 
 	const form = useForm({
 		resolver: zodResolver(createArticleSchema),
@@ -40,10 +42,12 @@ const ArticleForm = () => {
 	const watchedValues = form.watch();
 
 	useEffect(() => {
+		if (isSubmitting) return;
 		localStorage.setItem("form-data", JSON.stringify(watchedValues));
-	}, [watchedValues]);
+	}, [watchedValues, isSubmitting]);
 
 	const onSubmit = async (formData: z.infer<typeof createArticleSchema>) => {
+		setIsSubmitting(true);
 		const { error } = await actions.article.createArticle({
 			title: formData.title,
 			coverImage: formData.coverImage,
@@ -51,19 +55,24 @@ const ArticleForm = () => {
 		});
 
 		if (error) {
-			toast.error("Falha ao criar artigo.");
-			console.error(error);
+			toast.error(error.message);
 			return;
 		}
 
-		localStorage.setItem("article-content", "");
-		localStorage.setItem("form-data", JSON.stringify({}));
-
+		form.reset({
+			title: "",
+			coverImage: "",
+			content: "",
+		});
+		setValue("");
+		localStorage.removeItem("article-content");
+		localStorage.removeItem("form-data");
 		toast.success("Artigo criado com sucesso.");
+		setIsSubmitting(false);
 	};
 
 	return (
-		<Card className="w-full mb-6">
+		<Card className="w-full">
 			<CardHeader>
 				<CardTitle>Publicar artigo</CardTitle>
 				<CardDescription>Publique seu artigo.</CardDescription>
@@ -106,7 +115,7 @@ const ArticleForm = () => {
 							render={({ field, fieldState }) => (
 								<Field data-invalid={fieldState.invalid}>
 									<FieldLabel htmlFor="article-cover-image">
-										Url da capa do artigo (opcional)
+										Url da capa do artigo
 									</FieldLabel>
 									<Input
 										{...field}
@@ -154,6 +163,13 @@ const ArticleForm = () => {
 				<Field>
 					<Button type="submit" form="article-form">
 						Publicar
+					</Button>
+					<Button
+						onClick={async () => {
+							console.log(await actions.user.getUsers());
+						}}
+					>
+						Get users
 					</Button>
 				</Field>
 			</CardFooter>
