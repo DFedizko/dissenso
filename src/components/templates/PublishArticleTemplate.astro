@@ -4,7 +4,7 @@ import ArticleFormSkeleton from "../organisms/skeletons/ArticleFormSkeleton.astr
 import LayoutContainer from "../atoms/contianers/LayoutContainer.astro";
 ---
 
-<LayoutContainer class="flex-1 justify-center">
+<LayoutContainer class="flex-1 justify-center mb-6">
 	<ArticleForm client:only="react">
 		<ArticleFormSkeleton slot="fallback" />
 	</ArticleForm>
