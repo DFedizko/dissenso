@@ -1,22 +1,14 @@
 ---
 import ArticleTemplate from "@/components/templates/ArticleTemplate.astro";
 import Layout from "@/layouts/Layout.astro";
-import type { ArticleDTO } from "@/types/ArticleDTO";
+import type { ArticleDTO } from "@/dtos/ArticleDTO";
 
 export const prerender = false;
 
 const { slug } = Astro.params;
 
-Astro.response.headers.set(
-	"Cache-Control",
-	"public, max-age=604800"
-);
-Astro.response.headers.set(
-	"CDN-Cache-Control",
-	"public, max-age=604800"
-);
-
 const article: ArticleDTO = {
+	id: "",
 	title: "Como aplicar o data-driven na sua vida",
 	coverImage: "https://picsum.photos/seed/meu-artigo/1200/1200",
 	articleMeta: {
@@ -24,9 +16,12 @@ const article: ArticleDTO = {
 		date: "03/01/2026",
 		readingTime: "5 minutos",
 	},
-	content: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veritatis delectus incidunt quaerat accusamus molestias ratione, cupiditate error. Tenetur, commodi hic amet voluptatibus incidunt doloribus est deleniti quae fugit deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsam atque assumenda consequatur velit temporibus ratione amet reprehenderit ut, rem perferendis officia excepturi culpa, tenetur nemo esse! Dolore, fugit a!\nLorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veritatis delectus incidunt quaerat accusamus molestias ratione, cupiditate error. Tenetur, commodi hic amet voluptatibus incidunt doloribus est deleniti quae fugit deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsam atque assumenda consequatur velit temporibus ratione amet reprehenderit ut, rem perferendis officia excepturi culpa, tenetur nemo esse! Dolore, fugit a!",
+	content:
+		"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veritatis delectus incidunt quaerat accusamus molestias ratione, cupiditate error. Tenetur, commodi hic amet voluptatibus incidunt doloribus est deleniti quae fugit deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsam atque assumenda consequatur velit temporibus ratione amet reprehenderit ut, rem perferendis officia excepturi culpa, tenetur nemo esse! Dolore, fugit a!\nLorem ipsum dolor, sit amet consectetur adipisicing elit. Iure veritatis delectus incidunt quaerat accusamus molestias ratione, cupiditate error. Tenetur, commodi hic amet voluptatibus incidunt doloribus est deleniti quae fugit deserunt? Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque ipsam atque assumenda consequatur velit temporibus ratione amet reprehenderit ut, rem perferendis officia excepturi culpa, tenetur nemo esse! Dolore, fugit a!",
 	tags: [],
-}
+	createdAt: new Date(),
+	updatedAt: new Date(),
+};
 ---
 
 <Layout title={article.title}>
